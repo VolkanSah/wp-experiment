@@ -2,14 +2,14 @@
 
 /**
  * The plugin bootstrap file
- * @link              https://searchengine.team
+ * @link              https://wordpress-webmaster.de
  * @since             1.0.0
  * @package           SETeam
  *
  * @wordpress-plugin
- * Plugin Name:       WP Advanced Toolbox - WordPress-Webmaster.de
+ * Plugin Name:       Wp-Experiment
  * Plugin URI:        https://wordpress-webmaster.de
- * Description:       This free extension by by WordPress-Webmaster.de should help you to avoid chaos in your Wordpress installation. You will notice, your WordPress site will be much faster.
+ * Description:       Yet
  * Version:           1.0.0
  * Author:            Volkan Sah
  * Author URI:        https://wordpress-webmaster.de
