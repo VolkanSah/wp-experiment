@@ -481,12 +481,7 @@ class WPAdvancedToolbox {
 			( isset( $this->wp_advanced_toolbox__options['showids_29'] ) && $this->wp_advanced_toolbox__options['showids_29'] === 'showids_29' ) ? 'checked' : ''
 		);
 	}
-		public function dummy_21_callback() {
-		printf(
-			'<input type="checkbox" name="wp_advanced_toolbox__option_name[dummy_21]" id="dummy_21" value="dummy_21" %s> <label for="dummy_21">Dummy</label>',
-			( isset( $this->wp_advanced_toolbox__options['dummy_21'] ) && $this->wp_advanced_toolbox__options['dummy_21'] === 'dummy_21' ) ? 'checked' : ''
-		);
-	}
+		
 
 }
 if ( is_admin() )
@@ -517,7 +512,6 @@ if ( is_admin() )
  * $more_tag_scroll_19 = $wp_advanced_toolbox__options['more_tag_scroll_19']; // more tag & scroll
  * $date_20 = $wp_advanced_toolbox__options['date_20']; // Date
  * $showids_29 = $wp_advanced_toolbox__options['showids_29']; // shows id in page and post
-* $dummy_21 = $wp_advanced_toolbox__options['dummy_21']; // Date
 
  */
 
@@ -532,103 +526,103 @@ if( wp_advanced_toolbox__options )
 if( isset( $wp_advanced_toolbox__options['rsd_link_0']) )
 	{
 		// remove really simple discovery
-		remove_action('wp_head', 'rsd_link'); 
+		$this->remove_action('wp_head', 'rsd_link'); 
 	}
 if( isset( $wp_advanced_toolbox__options['wp_generator_1']) )
 	{
 		 // remove wordpress version
-		 remove_action('wp_head', 'wp_generator');
+		 $this->remove_action('wp_head', 'wp_generator');
 	}
 if( isset( $wp_advanced_toolbox__options['feed_2']) )
 	{
-		remove_action('wp_head', 'feed_links', 2); // remove rss feed links (make sure you add them in yourself if youre using feedblitz or an rss service)
-		remove_action('wp_head', 'feed_links_extra', 3); // removes all extra rss feed links
+		$this->remove_action('wp_head', 'feed_links', 2); // remove rss feed links (make sure you add them in yourself if youre using feedblitz or an rss service)
+		$this->remove_action('wp_head', 'feed_links_extra', 3); // removes all extra rss feed links
 
 	}
 if( isset( $wp_advanced_toolbox__options['wlwmanifest_3']) )
 	{
 		 // remove wlwmanifest.xml
-		 remove_action('wp_head', 'wlwmanifest_link');
+		 $this->remove_action('wp_head', 'wlwmanifest_link');
 	}
 if( isset( $wp_advanced_toolbox__options['shortlinks_4']) )
 	{
 		 // remove shortlink
-		 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
+		 $this->remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 	}
 if( isset( $wp_advanced_toolbox__options['random_and_parent_post_link_5']) )
 	{
-remove_action('wp_head', 'start_post_rel_link', 10, 0); // remove random post link
-remove_action('wp_head', 'parent_post_rel_link', 10, 0); // remove parent post link
+$this->remove_action('wp_head', 'start_post_rel_link', 10, 0); // remove random post link
+$this->remove_action('wp_head', 'parent_post_rel_link', 10, 0); // remove parent post link
 	}
 if( isset( $wp_advanced_toolbox__options['next_and_previous_post_links_6']) )
 	{
-remove_action('wp_head', 'adjacent_posts_rel_link', 10, 0); // remove the next and previous post links
-remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
+$this->remove_action('wp_head', 'adjacent_posts_rel_link', 10, 0); // remove the next and previous post links
+$this->remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
 	}
 if( isset( $wp_advanced_toolbox__options['emoji_7']) )
 	{
 	// emojis
-	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-	remove_action( 'wp_print_styles', 'print_emoji_styles' );
-	remove_action( 'admin_print_styles', 'print_emoji_styles' );	
-	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
-	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );	
-	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+	$this->remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+	$this->remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+	$this->remove_action( 'wp_print_styles', 'print_emoji_styles' );
+	$this->remove_action( 'admin_print_styles', 'print_emoji_styles' );	
+	$this->remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+	$this->remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );	
+	$this->remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
 	// emojis from TinyMCE
 	//add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
 	}
 if( isset( $wp_advanced_toolbox__options['rest_api_8']) )
 	{
 		  // Remove the REST API lines from the HTML Header
-			remove_action( 'wp_head', 'rest_output_link_wp_head', 10 );
+			$this->remove_action( 'wp_head', 'rest_output_link_wp_head', 10 );
 	}
 if( isset( $wp_advanced_toolbox__options['rest_api_endpoint_9']) )
 	{
 		 // Remove the REST API endpoint
-			remove_action( 'rest_api_init', 'wp_oembed_register_route' );
+			$this->remove_action( 'rest_api_init', 'wp_oembed_register_route' );
 	}
 if( isset( $wp_advanced_toolbox__options['oembed_auto_discovery_10']) )
 	{
 		  // Turn off oEmbed auto discovery
-			add_filter( 'embed_oembed_discover', '__return_false' );
+			$this->add_filter( 'embed_oembed_discover', '__return_false' );
 	}
 if( isset( $wp_advanced_toolbox__options['oembed_results_11']) )
 	{
 		 // Don't filter oEmbed results
-		remove_filter( 'oembed_dataparse', 'wp_filter_oembed_result', 10 );
+		$this->remove_filter( 'oembed_dataparse', 'wp_filter_oembed_result', 10 );
 	}
 if( isset( $wp_advanced_toolbox__options['oembed_discovery_links_12']) )
 	{
 		 // Remove oEmbed discovery links
-		remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+		$this->remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
 	}
 if( isset( $wp_advanced_toolbox__options['oembed_specific_javascript_13']) )
 	{
 		 // Remove oEmbed-specific JavaScript from the front-end and back-end
-			remove_action( 'wp_head', 'wp_oembed_add_host_js' );
+			$this->remove_action( 'wp_head', 'wp_oembed_add_host_js' );
 	}
 if( isset( $wp_advanced_toolbox__options['embeds_rewrite_14']) )
 	{
 		  // Remove all embeds rewrite rules
-			add_filter( 'rewrite_rules_array', 'disable_embeds_rewrites' );
+			$this->add_filter( 'rewrite_rules_array', 'disable_embeds_rewrites' );
 	}
 if( isset( $wp_advanced_toolbox__options['jsonfilter_v_1_15']) )
 	{
 		   // Filters for WP-API version 1.x
-			add_filter('json_enabled', '__return_false');
-			add_filter('json_jsonp_enabled', '__return_false');
+			$this->add_filter('json_enabled', '__return_false');
+			$this->add_filter('json_jsonp_enabled', '__return_false');
 	}
 if( isset( $wp_advanced_toolbox__options['jsonfilter_v_2_16']) )
 	{
 		   // Filters for WP-API version 2.x
-			add_filter('rest_enabled', '__return_false');
-			add_filter('rest_jsonp_enabled', '__return_false');
+			$this->add_filter('rest_enabled', '__return_false');
+			$this->add_filter('rest_jsonp_enabled', '__return_false');
 	}
 if( isset( $wp_advanced_toolbox__options['shortcodes_to_widgets_17']) )
 	{
 		 // adds shortcodes to widget
-		 add_filter( 'widget_text', 'do_shortcode' );
+		 $this->add_filter( 'widget_text', 'do_shortcode' );
 	}
 if( isset( $wp_advanced_toolbox__options['disable_ip_in_coments_18']) )
 	{
@@ -636,7 +630,7 @@ if( isset( $wp_advanced_toolbox__options['disable_ip_in_coments_18']) )
 		function wpwm_remove_commentsip( $comment_author_ip ) {
 		return '';
 		}
-		add_filter( 'pre_comment_user_ip', 'wpwm_remove_commentsip' );
+		$this->add_filter( 'pre_comment_user_ip', 'wpwm_remove_commentsip' );
 	}
 if( isset( $wp_advanced_toolbox__options['more_tag_scroll_19']) )
 	{
@@ -645,20 +639,20 @@ if( isset( $wp_advanced_toolbox__options['more_tag_scroll_19']) )
 		$link = preg_replace( '|#more-[0-9]+|', '', $link );
 		return $link;
 		}
-		add_filter( 'the_content_more_link', 'wpwm_remove_more_and_scroll' );
+		$this->add_filter( 'the_content_more_link', 'wpwm_remove_more_and_scroll' );
 	}
 if( isset( $wp_advanced_toolbox__options['date_20']) )
 	{
 		// remove date - hardcode
 		function wpwm_remove_post_dates() {
-		add_filter('the_date', '__return_false');
-		add_filter('the_time', '__return_false');
-		add_filter('the_modified_date', '__return_false');
-		add_filter('get_the_date', '__return_false');
-		add_filter('get_the_time', '__return_false');
-		add_filter('get_the_modified_date', '__return_false');
+		$this->add_filter('the_date', '__return_false');
+		$this->add_filter('the_time', '__return_false');
+		$this->add_filter('the_modified_date', '__return_false');
+		$this->add_filter('get_the_date', '__return_false');
+		$this->add_filter('get_the_time', '__return_false');
+		$this->add_filter('get_the_modified_date', '__return_false');
 		} 
-		add_action('loop_start', 'wpwm_remove_post_dates');
+		$this->add_action('loop_start', 'wpwm_remove_post_dates');
 	}
 if( isset( $wp_advanced_toolbox__options['showids_29']) )
 	{
@@ -667,101 +661,14 @@ if( isset( $wp_advanced_toolbox__options['showids_29']) )
 		// $columns['Column ID'] = 'Column Title';
 		return $columns;
 	}
-		add_filter('manage_posts_columns', 'wpwm_add_column', 5); // for posts
-		add_filter('manage_pages_columns', 'wpwm_add_column', 5); // for pages
+		$this->add_filter('manage_posts_columns', 'wpwm_add_column', 5); // for posts
+		$this->add_filter('manage_pages_columns', 'wpwm_add_column', 5); // for pages
 		function wpwm_column_content( $column, $id ){
 		if( $column === 'wpwm_post_id_clmn')
 		echo $id;
 		}
-		add_action('manage_posts_custom_column', 'wpwm_column_content', 5, 2); // for posts
-		add_action('manage_pages_custom_column', 'wpwm_column_content', 5, 2); // for pages
+		$this->add_action('manage_posts_custom_column', 'wpwm_column_content', 5, 2); // for posts
+		$this->add_action('manage_pages_custom_column', 'wpwm_column_content', 5, 2); // for pages
 	}
-
-// dummy example start
-if( isset( $wp_advanced_toolbox__options['dummy_21']) )
-	{
-		 // dummy script
-		 
-		 
-		 
-	}// dummy example end
-// finshdummy example
-
-
-
-
-
-
-
-
-// end class
-}
-
-
-
-
-
-
-// must in
-
-/*
-//* Remove URL field from comments
-function remove_url_comments($fields) {
-unset($fields['url']);
-return $fields;
-}
-add_filter('comment_form_default_fields','remove_url_comments');
-
-
-// Remove dns-prefetch Link from WordPress Head (Frontend)
-
-remove_action( 'wp_head', 'wp_resource_hints', 2 );
-
-
-// remove jquery
-function my_init() {
-    if (!is_admin()) {
-        wp_deregister_script('jquery');
-        wp_register_script('jquery', false);
-    }
-}
-add_action('init', 'my_init');
-
-// cleanup dashboard - oldschool style
-function wis_bd_dashboard_widgets() {
-	remove_meta_box('dashboard_right_now', 'dashboard', 'core');
-	remove_meta_box('dashboard_recent_comments', 'dashboard', 'core');
-	remove_meta_box('dashboard_incoming_links', 'dashboard', 'core');
-	remove_meta_box('dashboard_plugins', 'dashboard', 'core');
-	remove_meta_box('dashboard_quick_press', 'dashboard', 'core');
-	remove_meta_box('dashboard_recent_drafts', 'dashboard', 'core');
-	remove_meta_box('dashboard_primary', 'dashboard', 'core');
-	remove_meta_box('dashboard_secondary', 'dashboard', 'core');
-	}
-add_action( 'admin_menu','wis_bd_dashboard_widgets' );
-
-*/
-
-
-
-
-/**
- * Just adds a column without content
- *
- * @param array $columns Array of all the current columns IDs and titles
-
-function wpwm_add_column( $columns ){
-	$columns['wpwm_post_id_clmn'] = 'ID'; // $columns['Column ID'] = 'Column Title';
-	return $columns;
-}
-add_filter('manage_posts_columns', 'wpwm_add_column', 5); // for posts
-add_filter('manage_pages_columns', 'wpwm_add_column', 5); // for pages
-
-function wpwm_column_content( $column, $id ){
-	if( $column === 'wpwm_post_id_clmn')
-		echo $id;
-}
-add_action('manage_posts_custom_column', 'wpwm_column_content', 5, 2); // for posts
-add_action('manage_pages_custom_column', 'wpwm_column_content', 5, 2); // for pages
 
 */
