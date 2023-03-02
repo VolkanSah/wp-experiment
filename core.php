@@ -19,112 +19,96 @@
  * Domain Path:       /languages
  */
 
-class WPAdvancedToolboxPDO 	{
-	private $wp_advanced_toolbox__options;
-	protected $plugin_name;
-	protected $version;
+class WPAdvancedToolboxPDO {
 	protected $pdo;
+	private $wp_advanced_toolbox__options;
+
 	public function __construct() {
-		try 	{
+		try {
 			$this->pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4", DB_USER, DB_PASSWORD);
 			$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			} catch (PDOException $e) 	{
+		} catch (PDOException $e) {
 			die("Connection failed: " . $e->getMessage());
-				}
+		}
 
-		$this->plugin_name = 'WPAdvancedToolboxPDO';
-		$this->version = '1.0.0';
-		$this->add_actions();
-		$this->remove_action();
-							}
-	
-	}
-	private function add_actions() {
-		add_action( 'admin_menu', array( $this, 'wp_advanced_toolbox__add_plugin_page' ) );
-		add_action( 'admin_init', array( $this, 'wp_advanced_toolbox__page_init' ) );
-
+		add_action('admin_menu', array($this, 'wp_advanced_toolbox_add_plugin_page'));
+		add_action('admin_init', array($this, 'wp_advanced_toolbox_page_init'));
 	}
 
-
-	private  function wp_advanced_toolbox__add_plugin_page( $atts ) {
+	private function wp_advanced_toolbox_add_plugin_page() {
 		add_options_page(
-			'Wp-Experiment', // page_title
-			'Wp-Experiment', // menu_title
-			'manage_options', // capability
-			'wp-advanced-toolbox', // menu_slug
-			array( $this, 'wp_advanced_toolbox__create_admin_page' ) // function
+			'Wp-Experiment',
+			'Wp-Experiment',
+			'manage_options',
+			'wp-advanced-toolbox',
+			array($this, 'wp_advanced_toolbox_create_admin_page')
 		);
 	}
 
+	private function wp_advanced_toolbox_create_admin_page() {
+		$this->wp_advanced_toolbox__options = get_option('wp_advanced_toolbox__option_name');
+		?>
+		<div class="wrap">
+			<h2>Wp-Experiment</h2>
+			<p>some text 1 some text 2</p>
+			<form method="post" action="options.php">
+				<?php settings_fields('wp_advanced_toolbox__option_group'); ?>
+				<?php do_settings_sections('wp-advanced-toolbox-admin'); ?>
+				<?php submit_button(); ?>
+			</form>
+		</div>
+		<?php
+	}
 
-
-	// create admin_page
-	private function wp_advanced_toolbox__create_admin_page() {
-		$this->wp_advanced_toolbox__options = get_option( 'wp_advanced_toolbox__option_name' );
-		$html = "<div class="wrap">";
-			$html = "<h2> Wp-Experiment </h2>";
-			$html = "<p>some text 1 ";
-			$html = "some text 2</p>";
-			$html = "<form method="post" action="options.php">";
-			
-		}
-
-
-
-		// setting fields
-	private  function wp_advanced_toolbox__page_init() {
+	public function wp_advanced_toolbox_page_init() {
 		register_setting(
-			'wp_advanced_toolbox__option_group', // option_group
-			'wp_advanced_toolbox__option_name', // option_name
-			array( $this, 'wp_advanced_toolbox__sanitize' ) // sanitize_callback
+			'wp_advanced_toolbox__option_group',
+			'wp_advanced_toolbox__option_name',
+			array($this, 'wp_advanced_toolbox_sanitize')
 		);
+
 		add_settings_section(
-			'wp_advanced_toolbox__setting_section', // id
-			'Settings', // title
-			array( $this, 'wp_advanced_toolbox__section_info' ), // callback
-			'wp-advanced-toolbox-admin' // page
+			'wp_advanced_toolbox__setting_section',
+			'Settings',
+			array($this, 'wp_advanced_toolbox_section_info'),
+			'wp-advanced-toolbox-admin'
 		);
+
 		add_settings_field(
-			'rsd_link_0', // id
-			'RSD link', // title
-			array( $this, 'rsd_link_0_callback' ), // callback
-			'wp-advanced-toolbox-admin', // page
-			'wp_advanced_toolbox__setting_section' // section
+			'rsd_link_0',
+			'RSD link',
+			array($this, 'rsd_link_0_callback'),
+			'wp-advanced-toolbox-admin',
+			'wp_advanced_toolbox__setting_section'
 		);
-		}
-		// sanitize
-		private  function wp_advanced_toolbox__sanitize($input) {
+	}
+
+	public function wp_advanced_toolbox_sanitize($input) {
 		$sanitary_values = array();
-		if ( isset( $input['rsd_link_0'] ) ) {
+
+		if (isset($input['rsd_link_0'])) {
 			$sanitary_values['rsd_link_0'] = $input['rsd_link_0'];
 		}
-				return $sanitary_values;
-		}
-	// callback
-	private  function wp_advanced_toolbox__section_info() {
-		
+
+		return $sanitary_values;
 	}
 
-	private  function rsd_link_0_callback() {
-		printf(
-			'<input type="checkbox" name="wp_advanced_toolbox__option_name[rsd_link_0]" id="rsd_link_0" value="rsd_link_0" %s> <label for="rsd_link_0">remove really simple discovery link</label>',
-			( isset( $this->wp_advanced_toolbox__options['rsd_link_0'] ) && $this->wp_advanced_toolbox__options['rsd_link_0'] === 'rsd_link_0' ) ? 'checked' : ''
-		);
-	}
-	}
-if ( is_admin() )
-	$wp_advanced_toolbox_ = new WPAdvancedToolboxPDO();
-$wp_advanced_toolbox__options = get_option( 'wp_advanced_toolbox__option_name' );
-if( wp_advanced_toolbox__options )
-{
-if( isset( $wp_advanced_toolbox__options['rsd_link_0']) )
-	{
-		// remove really simple discovery
-		$this->remove_action('wp_head', 'rsd_link'); 
+	public function wp_advanced_toolbox_section_info() {
+		// no section info required
 	}
 
+	public function rsd_link_0_callback() {
+		?>
+		<input type="checkbox" name="wp_advanced_toolbox__option_name[rsd_link_0]" id="rsd_link_0" value="rsd_link_0" <?php checked(isset($this->wp_advanced_toolbox__options['rsd_link_0'])); ?>> 
+		<label for="rsd_link_0">remove really simple discovery link</label>
+		<?php
+	}
 }
-			
+if (is_admin()) {
+$wp_advanced_toolbox = new WPAdvancedToolboxPDO();
+$wp_advanced_toolbox_options = get_option('wp_advanced_toolbox__option_name');
+if ($wp_advanced_toolbox_options && isset($wp_advanced_toolbox_options['rsd_link_0'])) {
+remove_action('wp_head', 'rsd_link');
 }
-new WPAdvancedToolboxPDO();
+}
 
