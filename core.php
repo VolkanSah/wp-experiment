@@ -46,7 +46,7 @@ class WPAdvancedToolboxPDO 	{
 	}
 
 
-	public function wp_advanced_toolbox__add_plugin_page( $atts ) {
+	private  function wp_advanced_toolbox__add_plugin_page( $atts ) {
 		add_options_page(
 			'Wp-Experiment', // page_title
 			'Wp-Experiment', // menu_title
@@ -72,7 +72,7 @@ class WPAdvancedToolboxPDO 	{
 
 
 		// setting fields
-	public function wp_advanced_toolbox__page_init() {
+	private  function wp_advanced_toolbox__page_init() {
 		register_setting(
 			'wp_advanced_toolbox__option_group', // option_group
 			'wp_advanced_toolbox__option_name', // option_name
@@ -93,7 +93,7 @@ class WPAdvancedToolboxPDO 	{
 		);
 		}
 		// sanitize
-		public function wp_advanced_toolbox__sanitize($input) {
+		private  function wp_advanced_toolbox__sanitize($input) {
 		$sanitary_values = array();
 		if ( isset( $input['rsd_link_0'] ) ) {
 			$sanitary_values['rsd_link_0'] = $input['rsd_link_0'];
@@ -101,11 +101,11 @@ class WPAdvancedToolboxPDO 	{
 				return $sanitary_values;
 		}
 	// callback
-	public function wp_advanced_toolbox__section_info() {
+	private  function wp_advanced_toolbox__section_info() {
 		
 	}
 
-	public function rsd_link_0_callback() {
+	private  function rsd_link_0_callback() {
 		printf(
 			'<input type="checkbox" name="wp_advanced_toolbox__option_name[rsd_link_0]" id="rsd_link_0" value="rsd_link_0" %s> <label for="rsd_link_0">remove really simple discovery link</label>',
 			( isset( $this->wp_advanced_toolbox__options['rsd_link_0'] ) && $this->wp_advanced_toolbox__options['rsd_link_0'] === 'rsd_link_0' ) ? 'checked' : ''
