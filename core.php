@@ -66,7 +66,7 @@ class WPAdvancedToolboxPDO 	{
 			$html = "<p>some text 1 ";
 			$html = "some text 2</p>";
 			$html = "<form method="post" action="options.php">";
-			print($html);
+			
 		}
 
 
