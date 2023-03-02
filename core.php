@@ -83,6 +83,8 @@ class WPAdvancedToolboxPDO {
 		);
 	}
 
+	
+
 	public function wp_advanced_toolbox_sanitize($input) {
 		$sanitary_values = array();
 
@@ -90,19 +92,13 @@ class WPAdvancedToolboxPDO {
 			$sanitary_values['rsd_link_0'] = $input['rsd_link_0'];
 		}
 
-		return $sanitary_values;
-	}
+		if (isset($input['rsd_link_0'])) {
+			$new_option_value = $input['rsd_link_0'];
+			$stmt_update_option = $this->pdo->prepare("UPDATE wp_options SET option_value = :rsd_link_0 WHERE option_name = 'remove RSD link'");
+			)
 
-	public function wp_advanced_toolbox_section_info() {
-		// no section info required
-	}
-
-	public function rsd_link_0_callback() {
-		?>
-		<input type="checkbox" name="wp_advanced_toolbox__option_name[rsd_link_0]" id="rsd_link_0" value="rsd_link_0" <?php checked(isset($this->wp_advanced_toolbox__options['rsd_link_0'])); ?>> 
-		<label for="rsd_link_0">remove really simple discovery link</label>
-		<?php
-	}
+			return $sanitary_values;
+}
 }
 if (is_admin()) {
 $wp_advanced_toolbox = new WPAdvancedToolboxPDO();
