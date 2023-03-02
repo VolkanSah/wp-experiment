@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * The plugin bootstrap file
  * @link              https://wordpress-webmaster.de
  * @since             1.0.0
@@ -53,7 +53,7 @@ class WPAdvancedToolboxPDO {
 
 
 	// create admin_page
-	private function wp_advanced_toolbox__create_admin_page( $atts ) {
+	private function wp_advanced_toolbox__create_admin_page() {
 		$this->wp_advanced_toolbox__options = get_option( 'wp_advanced_toolbox__option_name' );
 		
 		$html .= "<div class="wrap">
@@ -125,26 +125,3 @@ if( isset( $wp_advanced_toolbox__options['rsd_link_0']) )
 }
 new WPAdvancedToolboxPDO();
 
-
-/**
-// for multisite soon
-
-	if ( !function_exists( 'activate_plugin' ) ) { 
-        require_once ABSPATH . '/wp-admin/includes/plugin.php'; 
-    } 
-      
-    // Plugin path to main plugin file with plugin data. 
-    $plugin = '../wp-content/plugins/plugin.php'; 
-      
-    // Optional. URL to redirect to. 
-    $redirect = ''; 
-      
-    // Optional. Whether to enable the plugin for all sites in the network 
-    // or just the current site. Multisite only. Default false. 
-    $network_wide = true; 
-      
-    // Optional. Whether to prevent calling activation hooks. Default false. 
-    $silent = false; 
-      
-    // NOTICE! Understand what this does before running. 
-    $result = activate_plugin($plugin, $redirect, $network_wide, $silent);
