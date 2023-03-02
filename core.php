@@ -19,18 +19,24 @@
  * Domain Path:       /languages
  */
 
-class WPAdvancedToolboxPDO {
+class WPAdvancedToolboxPDO 	{
 	private $wp_advanced_toolbox__options;
+	protected $plugin_name;
+	protected $version;
 	protected $pdo;
 	public function __construct() {
-		try {
+		try 	{
 			$this->pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4", DB_USER, DB_PASSWORD);
 			$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		} catch (PDOException $e) {
+			} catch (PDOException $e) 	{
 			die("Connection failed: " . $e->getMessage());
-		}
-		$this->add_action();
-	}
+				}
+
+		$this->plugin_name = 'WPAdvancedToolboxPDO';
+		$this->version = '1.0.0';
+		$this->add_actions();
+		$this->remove_action();
+							}
 	
 	}
 	private function add_actions() {
@@ -55,15 +61,12 @@ class WPAdvancedToolboxPDO {
 	// create admin_page
 	private function wp_advanced_toolbox__create_admin_page() {
 		$this->wp_advanced_toolbox__options = get_option( 'wp_advanced_toolbox__option_name' );
-		
-		$html .= "<div class="wrap">
-			<h2>WP Advanced Toolbox </h2>
-			<p>This free extension by WordPress-Webmaster.de should help you to avoid 
-			chaos in your Wordpress installation. You will notice, your WordPress site will be much faster.</p>
-			<?php settings_errors(); ?>
-			<form method="post" action="options.php">";
-			// HTML-Output 
-			echo $html;
+		$html = "<div class="wrap">";
+			$html = "<h2> Wp-Experiment </h2>";
+			$html = "<p>some text 1 ";
+			$html = "some text 2</p>";
+			$html = "<form method="post" action="options.php">";
+			print($html);
 		}
 
 
