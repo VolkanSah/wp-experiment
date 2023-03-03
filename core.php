@@ -36,8 +36,8 @@ class WPAdvancedToolboxPDO {
 			// Name & Version for updates
 			$this->plugin_name = 'wp-advanced-toolbox-pdp-stmt';
 			$this->version = '1.0.b';
-			$this->require_once plugin_dir_path( dirname( __FILE__ ) ) . 'register-settings.php';
-			$this->require_once plugin_dir_path( dirname( __FILE__ ) ) . 'register-settings.php';
+			$this->stmt->require_once plugin_dir_path( dirname( __FILE__ ) ) . 'register-settings.php';
+			$this->stmt->require_once plugin_dir_path( dirname( __FILE__ ) ) . 'sanitize.php';
 
 			// class optionpage	
 			$plugin_public = new WPAdvancedToolboxPDO( $this->add_settings_field(), 
