@@ -21,13 +21,13 @@
 
 class WPAdvancedToolboxPDO {
 	protected $pdo;
-	protected $WPAdvancedToolboxPDO;
 	protected $version;
 	protected $settings_fields;
 	protected $do_settings_sections;
 	private $wp_advanced_toolbox__options;
 	//  start function __construct
 	public function __construct() {
+		// use pdo
 		try {		$this->pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4", DB_USER, DB_PASSWORD);
 			$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		} catch (PDOException $e) {
