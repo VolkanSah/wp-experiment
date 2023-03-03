@@ -1,7 +1,6 @@
 <?php //register setings
-class WPAdvancedToolboxPDOregistersettings {
+class WPAdvancedToolboxPDO {
 	protected $pdo;
-	protected $this;
 	private $wp_advanced_toolbox__options;
 
 	public function __construct() {
