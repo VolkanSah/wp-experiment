@@ -1,2 +1,2 @@
 # wp-experiment
-it will not work!do not install it!
+This is a testdrive for: use pdo & stmt
