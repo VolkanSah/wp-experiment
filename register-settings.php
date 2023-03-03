@@ -188,4 +188,7 @@ public function wp_advanced_toolbox__page_init() {
 			'wp_advanced_toolbox__setting_section' // section
 		);
 	    }
+	$conn->close();
 	}
+
+
