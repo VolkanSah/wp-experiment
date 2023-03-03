@@ -28,7 +28,7 @@ class WPAdvancedToolboxPDO {
 	//  start function __construct
 	public function __construct() {
 		// use pdo
-		try {		$this->pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4", DB_USER, DB_PASSWORD);
+		try {	$this->pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4", DB_USER, DB_PASSWORD);
 			$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		} catch (PDOException $e) {
 			die("Connection failed: " . $e->getMessage());
@@ -37,6 +37,8 @@ class WPAdvancedToolboxPDO {
 			$this->plugin_name = 'wp-advanced-toolbox-pdp-stmt';
 			$this->version = '1.0.b';
 			$this->stmt->require_once plugin_dir_path( dirname( __FILE__ ) ) . 'register-settings.php';
+			$this->add_action('admin_init', array($this, 'wp_advanced_toolbox_page_init'));
+
 			$this->stmt->require_once plugin_dir_path( dirname( __FILE__ ) ) . 'sanitize.php';
 
 			// class optionpage	
@@ -44,7 +46,6 @@ class WPAdvancedToolboxPDO {
 								   $this->get_version(), 
 								   $this->do_settings_sections() );
 			$this->add_action('admin_menu', array($this, 'wp_advanced_toolbox_add_plugin_page'));
-			$this->add_action('admin_init', array($this, 'wp_advanced_toolbox_page_init'));
 			$this->wp_advanced_toolbox_add_plugin_page() {
 			$this->add_options_page('Wp-Experiment','Wp-Experiment','manage_options','wp-advanced-toolbox',array($this, 'wp_advanced_toolbox_create_admin_page'));
 			$this->wp_advanced_toolbox_create_admin_page() {
@@ -69,13 +70,6 @@ class WPAdvancedToolboxPDO {
 	
 	//  end function __construct
 		
-		// start output hooks as example here : remove rsd link
 
-if (is_admin()) {
-$wp_advanced_toolbox = new WPAdvancedToolboxPDO();
-$wp_advanced_toolbox_options = get_option('wp_advanced_toolbox__option_name');
-if ($wp_advanced_toolbox_options && isset($wp_advanced_toolbox_options['rsd_link_0'])) {
-$this->remove_action('wp_head', 'rsd_link');
-}
 }
 
