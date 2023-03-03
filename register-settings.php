@@ -1,6 +1,7 @@
 <?php //register setings
 class WPAdvancedToolboxPDOregistersettings {
 	protected $pdo;
+	protected $this;
 	private $wp_advanced_toolbox__options;
 
 	public function __construct() {
@@ -11,7 +12,7 @@ class WPAdvancedToolboxPDOregistersettings {
 			die("Connection failed: " . $e->getMessage());
 		}
 
-		add_settings_field('init', array($this, 'wp_advanced_toolbox__setting_section'));
+		$this->add_settings_field('init', array($this, 'wp_advanced_toolbox__setting_section'));
 	}
 
 public function wp_advanced_toolbox__page_init() {
