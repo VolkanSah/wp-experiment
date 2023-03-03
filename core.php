@@ -22,7 +22,6 @@
 class WPAdvancedToolboxPDO {
 	protected $pdo;
 	protected $version;
-	protected $settings_fields;
 	protected $do_settings_sections;
 	private $wp_advanced_toolbox__options;
 	//  start function __construct
@@ -38,13 +37,11 @@ class WPAdvancedToolboxPDO {
 			$this->version = '1.0.b';
 			$this->stmt->require_once plugin_dir_path( dirname( __FILE__ ) ) . 'register-settings.php';
 			$this->add_action('admin_init', array($this, 'wp_advanced_toolbox_page_init'));
-
 			$this->stmt->require_once plugin_dir_path( dirname( __FILE__ ) ) . 'sanitize.php';
 
-			// class optionpage	
-			$plugin_public = new WPAdvancedToolboxPDO( $this->add_settings_field(), 
-								   $this->get_version(), 
-								   $this->do_settings_sections() );
+			$this->add_settings_field(), 
+			$this->get_version(), 
+			$this->do_settings_sections() );
 			$this->add_action('admin_menu', array($this, 'wp_advanced_toolbox_add_plugin_page'));
 			$this->wp_advanced_toolbox_add_plugin_page() {
 			$this->add_options_page('Wp-Experiment','Wp-Experiment','manage_options','wp-advanced-toolbox',array($this, 'wp_advanced_toolbox_create_admin_page'));
@@ -54,7 +51,6 @@ class WPAdvancedToolboxPDO {
 			?> 
 			<div class="wrap">
 			<h2>Wp-Experiment</h2>
-			<p>some text 1 some text 2</p>
 			<form method="post" action="options.php">
 				<?php settings_fields('wp_advanced_toolbox__option_group'); ?>
 				<?php do_settings_sections('wp-advanced-toolbox-admin'); ?>
@@ -65,11 +61,7 @@ class WPAdvancedToolboxPDO {
 	}
 		
 	}
-	
-	
-	
-	//  end function __construct
-		
+
 
 }
 
