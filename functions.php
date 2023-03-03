@@ -1,4 +1,4 @@
-<?php
+<?php //do not use, only collection
 class WPAdvancedToolbox {
 	private $wp_advanced_toolbox__options;
 
