@@ -1,18 +1,4 @@
 <?php //register setings
-class WPAdvancedToolboxPDO {
-	protected $pdo;
-	private $wp_advanced_toolbox__options;
-
-	public function __construct() {
-		try {
-			$this->pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4", DB_USER, DB_PASSWORD);
-			$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		} catch (PDOException $e) {
-			die("Connection failed: " . $e->getMessage());
-		}
-
-		$this->add_settings_field('init', array($this, 'wp_advanced_toolbox__setting_section'));
-	}
 
 public function wp_advanced_toolbox__page_init() {
 		register_setting(
@@ -188,7 +174,5 @@ public function wp_advanced_toolbox__page_init() {
 			'wp_advanced_toolbox__setting_section' // section
 		);
 	    }
-	$conn->close();
-	}
-
+	
 
