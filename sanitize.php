@@ -101,5 +101,7 @@ class WPAdvancedToolboxPDO {
 
 		
 	  }
+		$conn->close();
+
 	}// end class
 
