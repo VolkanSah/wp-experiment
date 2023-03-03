@@ -1,5 +1,5 @@
 <?php //register setings
-class WPAdvancedToolboxPDOregistersettings {
+class WPAdvancedToolboxPDO {
 	protected $pdo;
 	protected $this;
   protected $input;
