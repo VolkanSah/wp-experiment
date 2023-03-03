@@ -1,4 +1,23 @@
-public function wp_advanced_toolbox__sanitize($input) {
+<?php //register setings
+class WPAdvancedToolboxPDOregistersettings {
+	protected $pdo;
+	protected $this;
+  protected $input;
+	private $wp_advanced_toolbox__options;
+
+	public function __construct() {
+		try {
+			$this->pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4", DB_USER, DB_PASSWORD);
+			$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		} catch (PDOException $e) {
+			die("Connection failed: " . $e->getMessage());
+		}
+
+		$this->return $sanitary_values;
+	}
+
+
+  private function wp_advanced_toolbox__sanitize($input) {
 		$sanitary_values = array();
 		if ( isset( $input['set_rsd_0'] ) ) {
 			$sanitary_values['set_rsd_0'] = $input['set_rsd_0'];
@@ -80,5 +99,7 @@ public function wp_advanced_toolbox__sanitize($input) {
 			$sanitary_values['set_shortw_19'] = $input['set_shortw_19'];
 		}
 
-		return $sanitary_values;
-	}
+		
+	  }
+	}// end class
+
