@@ -1,8 +1,8 @@
 <?php //register setings
 class WPAdvancedToolboxPDO {
 	protected $pdo;
-	protected $this;
-  protected $input;
+	protected $input;
+	protected $sanitary_values;
 	private $wp_advanced_toolbox__options;
 
 	public function __construct() {
@@ -14,10 +14,7 @@ class WPAdvancedToolboxPDO {
 		}
 
 		$this->return $sanitary_values;
-	}
-
-
-  private function wp_advanced_toolbox__sanitize($input) {
+		$this->wp_advanced_toolbox__sanitize($input) {
 		$sanitary_values = array();
 		if ( isset( $input['set_rsd_0'] ) ) {
 			$sanitary_values['set_rsd_0'] = $input['set_rsd_0'];
@@ -98,9 +95,13 @@ class WPAdvancedToolboxPDO {
 		if ( isset( $input['set_shortw_19'] ) ) {
 			$sanitary_values['set_shortw_19'] = $input['set_shortw_19'];
 		}
+	}
+
+
+
 
 		
-	  }
+	 
 		$conn->close();
 
 	}// end class
