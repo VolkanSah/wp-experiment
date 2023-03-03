@@ -174,5 +174,16 @@ public function wp_advanced_toolbox__page_init() {
 			'wp_advanced_toolbox__setting_section' // section
 		);
 	    }
+
+		// start output hooks as example here : remove rsd link
+
+if (is_admin()) {
+$wp_advanced_toolbox = new WPAdvancedToolboxPDO();
+$wp_advanced_toolbox_options = get_option('wp_advanced_toolbox__option_name');
+if ($wp_advanced_toolbox_options && isset($wp_advanced_toolbox_options['rsd_link_0'])) {
+$this->remove_action('wp_head', 'rsd_link');
+}
+	
+	// etc
 	
 
